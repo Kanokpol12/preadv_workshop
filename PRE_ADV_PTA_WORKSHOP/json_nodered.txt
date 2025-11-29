@@ -1,0 +1,75 @@
+[
+    {
+        "id": "b1ec2c39a01d0137",
+        "type": "tab",
+        "label": "PRE_AD_WORKSHOP",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "821cf2eaee989b60",
+        "type": "mqtt in",
+        "z": "b1ec2c39a01d0137",
+        "name": "PUBLISH_from_python_color",
+        "topic": "idt\\w3\\pre\\color",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "mqtt_broker",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 240,
+        "y": 160,
+        "wires": [
+            [
+                "f3a026c68761f13d"
+            ]
+        ]
+    },
+    {
+        "id": "f3a026c68761f13d",
+        "type": "debug",
+        "z": "b1ec2c39a01d0137",
+        "name": "debug (DIsplay)",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 540,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "mqtt_broker",
+        "type": "mqtt-broker",
+        "name": "EMQX Broker",
+        "broker": "broker.emqx.io",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    }
+]
