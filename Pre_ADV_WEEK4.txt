@@ -1,0 +1,43 @@
+import time
+# MicroPython & Thonny
+from machine import Pin, ADC
+from utime import sleep
+
+# ถ้าใช้ Raspberry Pi ต้องใช้ไลบรารี RPi.GPIO ในการควบคุม GPIO
+# import RPi.GPIO as GPIO 
+print("Hello, ESP32!")  # แสดงข้อความใน Shell ของ Thonny
+
+L_LED = Pin(16, Pin.OUT)  # กำหนด GPIO12 เป็น Output
+R_RED = Pin(17, Pin.OUT)  # กำหนด GPIO12 เป็น Output
+LDR_PIN = Pin(34, Pin.OUT)
+
+# ค่าที่ขาดหายไปในโค้ดต้นฉบับคือ HIGH/LOW
+LED_ON = 1
+LED_OFF = 0
+THRESHOLD = 3000 # ค่าเกณฑ์ในการตัดสินใจเปิด/ปิด LED
+
+adc = ADC(Pin(LDR_PIN))
+adc.atten(ADC.ATTN_11DB) # ตั้งค่า Attenuation เป็น 11dB เพื่อให้อ่านค่าได้เต็มช่วง 0V ถึง 3.3V
+adc.width(ADC.WIDTH_12BIT) # ตั้งค่าความละเอียดเป็น 12 บิต (ค่า 0 ถึง 4095)
+
+print("Setup Complete.")
+sleep(0.5)
+
+while True:
+    val = adc.read()
+        
+    print(f"LDR: {val}")
+
+    if val > THRESHOLD:
+        # เปิด LED (HIGH/1) - แทนที่ ___ ด้วย 1
+        L_LED.value(1) 
+        R_LED.value(1) 
+        print("LED ON ")
+    else:
+        # ปิด LED (LOW/0) - แทนที่ ____ ด้วย 0
+        L_LED.value(0) 
+        R_LED.value(0) 
+        print("LED OFF ")
+
+    # หน่วงเวลา 500 มิลลิวินาที (เทียบเท่า delay(500))
+    sleep(5)
